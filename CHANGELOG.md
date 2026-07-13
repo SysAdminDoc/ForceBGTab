@@ -4,6 +4,17 @@ All notable changes to ForceBGTab are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish
 `vMAJOR.MINOR.PATCH` versions.
 
+## [0.1.1] - 2026-07-13
+
+### Changed
+- Minimized the brief foreground flash when a tab is sent to the background. The
+  new tab is now reverted to the opener at the earliest signal (`onCreated`, via
+  `openerTabId`) instead of only after the delayed `onActivated` path, cutting
+  the visible flash toward the ~1-frame platform minimum. The settle-time
+  `onActivated` revert is retained as a reliable fallback (both target the same
+  opener tab, so there is no double flash). The flash cannot be fully eliminated:
+  Chromium activates and paints a link-opened tab before any extension code runs.
+
 ## [0.1.0] - 2026-07-13
 
 Initial release. Clean-room, open-source Manifest V3 extension.

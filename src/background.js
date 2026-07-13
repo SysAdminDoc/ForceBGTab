@@ -97,6 +97,15 @@ api.tabs.onCreated.addListener((tab) => {
     recentlyCreatedTabs.add(tab.id);
     // Safety purge in case the follow-up onActivated never arrives.
     setTimeout(() => recentlyCreatedTabs.delete(tab.id), 500);
+    // Earliest possible revert: switch straight back to the opener now, without
+    // waiting for onActivated. This is the fastest signal we get, so it keeps the
+    // new tab's foreground flash to the platform minimum (~1 frame). The
+    // onActivated handler below still runs as a reliable settle-time fallback in
+    // case this early attempt doesn't "stick" (both target the same opener tab,
+    // so there's no double flash).
+    if (tab.openerTabId != null) {
+      api.tabs.update(tab.openerTabId, { active: true }).catch(() => {});
+    }
   }
 });
 

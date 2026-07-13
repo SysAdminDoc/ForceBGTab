@@ -72,11 +72,12 @@ test("link-opened active tab switches focus back to opener", async () => {
   w.fire("onActivated", { tabId: 1 }); // user is on tab 1
   w.fire("onCreated", { id: 2, active: true, openerTabId: 1, pendingUrl: "https://example.com/" });
   w.fire("onActivated", { tabId: 2 }); // browser focuses the new tab
-  w.flush(); // run the 50ms switch-back
+  w.flush(); // run the settle-time fallback
 
-  assert.equal(w.updateCalls.length, 1);
-  assert.equal(w.updateCalls[0].id, 1);
-  assert.equal(w.updateCalls[0].props.active, true);
+  // Early (onCreated) + fallback (onActivated) reverts may both fire; every one
+  // must re-activate the opener (tab 1), never the new tab.
+  assert.ok(w.updateCalls.length >= 1, "opener should be re-activated");
+  assert.ok(w.updateCalls.every((c) => c.id === 1 && c.props.active === true));
 });
 
 test("Ctrl+T style tab (no opener) is left in the foreground", async () => {
@@ -136,7 +137,6 @@ test("per-site bg rule wins even when globally disabled", async () => {
   w.fire("onActivated", { tabId: 2 });
   w.flush();
 
-  assert.equal(w.updateCalls.length, 1);
-  assert.equal(w.updateCalls[0].id, 1);
-  assert.equal(w.updateCalls[0].props.active, true);
+  assert.ok(w.updateCalls.length >= 1, "opener should be re-activated");
+  assert.ok(w.updateCalls.every((c) => c.id === 1 && c.props.active === true));
 });

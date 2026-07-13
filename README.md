@@ -1,6 +1,6 @@
 # ForceBGTab
 
-[![Version](https://img.shields.io/badge/version-0.1.0-cba6f7)](https://github.com/SysAdminDoc/ForceBGTab/releases)
+[![Version](https://img.shields.io/badge/version-0.1.1-cba6f7)](https://github.com/SysAdminDoc/ForceBGTab/releases)
 [![License](https://img.shields.io/badge/license-MIT-a6e3a1)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Chrome%20%7C%20Edge-89b4fa)](#install)
 [![Manifest](https://img.shields.io/badge/manifest-v3-f9e2af)](manifest.json)
