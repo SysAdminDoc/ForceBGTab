@@ -1,0 +1,23 @@
+# Build artifacts
+dist/
+*.zip
+*.crx
+
+# Self-host / signing keys — never commit
+*.pem
+
+# Agent + local working notes
+CLAUDE.md
+CODEX_CHANGELOG.md
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

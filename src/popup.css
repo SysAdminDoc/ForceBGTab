@@ -1,0 +1,269 @@
+/* ForceBGTab popup — Catppuccin Mocha */
+:root {
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
+  --surface0: #313244;
+  --surface1: #45475a;
+  --surface2: #585b70;
+  --overlay0: #6c7086;
+  --text: #cdd6f4;
+  --subtext1: #bac2de;
+  --subtext0: #a6adc8;
+  --mauve: #cba6f7;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --blue: #89b4fa;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 320px;
+  background: var(--base);
+  color: var(--text);
+  font: 13px/1.4 "Segoe UI", system-ui, sans-serif;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo {
+  border-radius: 8px;
+  display: block;
+}
+.titles {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+h1 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.version {
+  font-size: 11px;
+  color: var(--overlay0);
+}
+
+.card {
+  background: var(--mantle);
+  border: 1px solid var(--surface0);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+/* Master toggle */
+.master {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.master-title {
+  display: block;
+  font-weight: 600;
+}
+.master-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--subtext0);
+  margin-top: 2px;
+}
+
+/* Switch — deliberately a rounded rectangle (radius 6), not a pill */
+.switch {
+  position: relative;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.track {
+  display: block;
+  width: 44px;
+  height: 24px;
+  background: var(--surface1);
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: var(--subtext0);
+  border-radius: 4px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.switch input:checked + .track {
+  background: var(--mauve);
+}
+.switch input:checked + .track .thumb {
+  transform: translateX(20px);
+  background: var(--crust);
+}
+
+/* Site section */
+.site-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.site-heading {
+  font-weight: 600;
+}
+.site-host {
+  font-size: 12px;
+  color: var(--mauve);
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background: var(--crust);
+  border-radius: 8px;
+  padding: 4px;
+}
+.seg {
+  border: 0;
+  background: transparent;
+  color: var(--subtext0);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.seg:hover {
+  color: var(--text);
+}
+.seg.is-active {
+  background: var(--surface1);
+  color: var(--text);
+}
+.seg[data-rule="bg"].is-active {
+  background: color-mix(in srgb, var(--mauve) 30%, var(--surface0));
+  color: var(--text);
+}
+.seg[data-rule="fg"].is-active {
+  background: color-mix(in srgb, var(--blue) 30%, var(--surface0));
+  color: var(--text);
+}
+
+/* Rules list */
+.rules-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.rules-heading {
+  font-weight: 600;
+}
+.rules-count {
+  font-size: 11px;
+  color: var(--overlay0);
+  background: var(--surface0);
+  border-radius: 6px;
+  padding: 1px 7px;
+}
+.rules-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface0);
+  border-radius: 8px;
+  padding: 7px 9px;
+}
+.rule-host {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rule-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.rule-badge.bg {
+  color: var(--mauve);
+  background: color-mix(in srgb, var(--mauve) 18%, transparent);
+}
+.rule-badge.fg {
+  color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 18%, transparent);
+}
+.rule-remove {
+  border: 0;
+  background: transparent;
+  color: var(--overlay0);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+.rule-remove:hover {
+  color: var(--red);
+  background: color-mix(in srgb, var(--red) 15%, transparent);
+}
+.rules-empty {
+  font-size: 12px;
+  color: var(--overlay0);
+  text-align: center;
+  padding: 6px 0 2px;
+}
+
+/* Footer */
+.app-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--overlay0);
+}
+.app-footer a {
+  color: var(--subtext0);
+  text-decoration: none;
+}
+.app-footer a:hover {
+  color: var(--mauve);
+}
+.app-footer .dot {
+  color: var(--surface2);
+}

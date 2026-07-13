@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ForceBGTab</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <img class="logo" src="../icons/48.png" alt="" width="28" height="28" />
+      <div class="titles">
+        <h1>ForceBGTab</h1>
+        <span class="version" id="version">v0.1.0</span>
+      </div>
+    </header>
+
+    <section class="card master">
+      <div class="master-label">
+        <span class="master-title">Force new tabs to background</span>
+        <span class="master-sub">Links won't steal focus from this tab</span>
+      </div>
+      <label class="switch" title="Toggle background tabs">
+        <input type="checkbox" id="master-toggle" />
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </section>
+
+    <section class="card site">
+      <div class="site-head">
+        <span class="site-heading">This site</span>
+        <span class="site-host" id="site-host">—</span>
+      </div>
+      <div class="segmented" id="site-rule" role="group" aria-label="Rule for this site">
+        <button type="button" data-rule="default" class="seg is-active">Default</button>
+        <button type="button" data-rule="bg" class="seg">Background</button>
+        <button type="button" data-rule="fg" class="seg">Foreground</button>
+      </div>
+    </section>
+
+    <section class="card rules">
+      <div class="rules-head">
+        <span class="rules-heading">Site rules</span>
+        <span class="rules-count" id="rules-count">0</span>
+      </div>
+      <ul class="rules-list" id="rules-list"></ul>
+      <p class="rules-empty" id="rules-empty">No per-site overrides yet.</p>
+    </section>
+
+    <footer class="app-footer">
+      <a id="repo-link" href="https://github.com/SysAdminDoc/ForceBGTab" target="_blank" rel="noreferrer noopener">GitHub</a>
+      <span class="dot">·</span>
+      <span>Background-only · no page access</span>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
