@@ -88,6 +88,19 @@ generate_icons.py       # icon master (Pillow)
 build.py                # ZIP + optional CRX3 packaging
 ```
 
+## Tests
+
+The focus-switch logic runs under a stubbed `chrome` API with Node's built-in
+test runner — no browser required:
+
+```bash
+node --test
+```
+
+Covered: switch-back to the opener on a link-opened tab, and every exclusion
+(Ctrl+T / opener-less tabs, internal schemes, global toggle off, per-site
+foreground/background rules with subdomain matching).
+
 ## Privacy
 
 ForceBGTab reads tab URLs only to apply your per-site rules and to skip internal
