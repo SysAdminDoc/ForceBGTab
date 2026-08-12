@@ -14,7 +14,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const source = readFileSync(join(here, "..", "src", "background.js"), "utf8");
 
 // Build a fresh, isolated background-worker instance for each scenario.
-function loadWorker(settings) {
+function loadWorker(settings, namespace = "chrome") {
   const listeners = { onCreated: [], onActivated: [], onRemoved: [], onChanged: [] };
   const updateCalls = [];
   const timers = [];
@@ -36,7 +36,8 @@ function loadWorker(settings) {
   };
 
   const sandbox = {
-    chrome,
+    chrome: namespace === "chrome" ? chrome : undefined,
+    browser: namespace === "browser" ? chrome : undefined,
     URL,
     console,
     // Capture timers so the harness can flush them deterministically.
@@ -138,5 +139,18 @@ test("per-site bg rule wins even when globally disabled", async () => {
   w.flush();
 
   assert.ok(w.updateCalls.length >= 1, "opener should be re-activated");
+  assert.ok(w.updateCalls.every((c) => c.id === 1 && c.props.active === true));
+});
+
+test("Firefox browser namespace uses the same focus logic", async () => {
+  const w = loadWorker({ enabled: true, siteRules: {} }, "browser");
+  await w.ready();
+
+  w.fire("onActivated", { tabId: 1 });
+  w.fire("onCreated", { id: 2, active: true, openerTabId: 1, pendingUrl: "https://example.com/" });
+  w.fire("onActivated", { tabId: 2 });
+  w.flush();
+
+  assert.ok(w.updateCalls.length >= 1, "opener should be re-activated through browser");
   assert.ok(w.updateCalls.every((c) => c.id === 1 && c.props.active === true));
 });

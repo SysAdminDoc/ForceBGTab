@@ -11,7 +11,12 @@
 // re-activate the opener. The visible result is a brief flicker, then focus
 // snaps back. Background-only: no content scripts, no host permissions.
 
-const api = chrome;
+// Chrome's MV3 service worker loads this bridge explicitly. Firefox loads the
+// same bridge as the first background script in its event-page environment.
+if (!globalThis.ForceBGTabApi && typeof importScripts === "function") {
+  importScripts("browser-api.js");
+}
+const api = globalThis.ForceBGTabApi ?? globalThis.browser ?? globalThis.chrome;
 
 const DEFAULTS = { enabled: true, siteRules: {} };
 let settings = { enabled: true, siteRules: {} };

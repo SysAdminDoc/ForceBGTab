@@ -1,7 +1,7 @@
 // ForceBGTab v0.1.0 — popup controller
 
-const api = chrome;
-const DEFAULTS = { enabled: true, siteRules: {} };
+const api = globalThis.ForceBGTabApi ?? globalThis.browser ?? globalThis.chrome;
+const tools = globalThis.ForceBGTabSettings;
 
 const els = {
   version: document.getElementById("version"),
@@ -14,21 +14,20 @@ const els = {
   repoLink: document.getElementById("repo-link"),
 };
 
-let settings = { ...DEFAULTS };
+let settings = tools.normalizeSettings(tools.DEFAULTS);
 let currentHost = null;
 
 function hostnameOf(url) {
   try {
-    return new URL(url).hostname.replace(/^www\./, "");
+    return tools.normalizeHost(new URL(url).hostname);
   } catch {
     return null;
   }
 }
 
 function getSettings() {
-  return api.storage.local.get(DEFAULTS).then((stored) => {
-    settings = { ...DEFAULTS, ...stored };
-    settings.siteRules = settings.siteRules || {};
+  return api.storage.local.get(tools.DEFAULTS).then((stored) => {
+    settings = tools.normalizeSettings(stored);
   });
 }
 
