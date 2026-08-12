@@ -4,6 +4,23 @@ All notable changes to ForceBGTab are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish
 `vMAJOR.MINOR.PATCH` versions.
 
+## [0.2.0] - 2026-08-12
+
+### Added
+- Firefox MV3 packaging with an AMO-friendly manifest, Gecko metadata, and a
+  `browser`/`chrome` API namespace bridge.
+- Full-window options page for managing all site rules, changing individual
+  rules, and importing or exporting site rules as JSON.
+
+### Changed
+- The build now emits versioned Chrome/Edge and Firefox ZIP packages.
+- Site-rule imports normalize hosts and skip invalid entries when valid rules
+  remain; plain rule maps and the versioned export envelope are supported.
+
+### Fixed
+- Delayed Blob URL revocation so exported JSON downloads remain reliable on
+  slower browsers.
+
 ## [0.1.1] - 2026-07-13
 
 ### Changed

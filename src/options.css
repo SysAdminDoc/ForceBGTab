@@ -1,0 +1,158 @@
+/* Full-window settings layout. Shared popup components come from popup.css. */
+.options-page {
+  width: auto;
+  min-width: 520px;
+  max-width: 920px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 32px;
+  gap: 18px;
+}
+
+.options-page .app-header {
+  gap: 14px;
+}
+
+.options-page .titles {
+  gap: 10px;
+}
+
+.options-page h1 {
+  font-size: 21px;
+}
+
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.options-grid .card {
+  padding: 18px;
+}
+
+.section-sub {
+  color: var(--subtext0);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.rules-head,
+.transfer-head {
+  margin-bottom: 14px;
+}
+
+.options-page .rules-list {
+  gap: 8px;
+}
+
+.options-page .rule-item {
+  padding: 10px 12px;
+}
+
+.rule-select {
+  border: 1px solid var(--surface1);
+  border-radius: 6px;
+  background: var(--crust);
+  color: var(--text);
+  font: inherit;
+  padding: 5px 8px;
+}
+
+.rule-select:focus,
+.transfer textarea:focus,
+.transfer button:focus-visible,
+.transfer input:focus-visible {
+  outline: 2px solid var(--mauve);
+  outline-offset: 2px;
+}
+
+.rule-remove {
+  font-size: 18px;
+}
+
+.transfer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.primary-button,
+.secondary-button {
+  border: 1px solid var(--surface1);
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.primary-button {
+  background: var(--mauve);
+  border-color: var(--mauve);
+  color: var(--crust);
+}
+
+.secondary-button {
+  background: var(--surface0);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  filter: brightness(1.1);
+}
+
+.secondary-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.transfer textarea {
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  border: 1px solid var(--surface1);
+  border-radius: 8px;
+  background: var(--crust);
+  color: var(--text);
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+  padding: 10px;
+}
+
+.transfer-note,
+.transfer-status {
+  color: var(--overlay0);
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+.transfer-status.is-error {
+  color: var(--red);
+}
+
+.transfer-status.is-success {
+  color: var(--green);
+}
+
+@media (max-width: 600px) {
+  .options-page {
+    min-width: 0;
+    padding: 20px 16px;
+  }
+
+  .options-page .rule-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .rule-host {
+    min-width: 180px;
+  }
+}

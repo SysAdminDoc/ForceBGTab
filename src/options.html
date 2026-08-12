@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ForceBGTab settings</title>
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body class="options-page">
+    <header class="app-header">
+      <img class="logo" src="../icons/48.png" alt="" width="40" height="40" />
+      <div class="titles">
+        <h1>ForceBGTab</h1>
+        <span class="version" id="version">v0.2.0</span>
+      </div>
+    </header>
+
+    <main class="options-grid">
+      <section class="card master">
+        <div class="master-label">
+          <span class="master-title">Force new tabs to background</span>
+          <span class="master-sub">Links won't steal focus from this tab</span>
+        </div>
+        <label class="switch" title="Toggle background tabs">
+          <input type="checkbox" id="master-toggle" />
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </section>
+
+      <section class="card rules">
+        <div class="rules-head">
+          <div>
+            <span class="rules-heading">Site rules</span>
+            <p class="section-sub">A rule for example.com also covers its subdomains.</p>
+          </div>
+          <span class="rules-count" id="rules-count">0</span>
+        </div>
+        <ul class="rules-list" id="rules-list"></ul>
+        <p class="rules-empty" id="rules-empty">No per-site overrides yet.</p>
+      </section>
+
+      <section class="card transfer">
+        <div class="transfer-head">
+          <div>
+            <span class="rules-heading">Import / export</span>
+            <p class="section-sub">Move site rules between profiles or browsers.</p>
+          </div>
+        </div>
+        <div class="transfer-actions">
+          <button type="button" class="primary-button" id="export-rules">Export JSON</button>
+          <label class="secondary-button">
+            Import JSON file
+            <input type="file" id="import-file" accept="application/json,.json" />
+          </label>
+          <button type="button" class="secondary-button" id="import-text">Import text</button>
+        </div>
+        <textarea id="rules-json" spellcheck="false" placeholder='{"siteRules":{"example.com":"bg"}}'></textarea>
+        <p class="transfer-note">Import replaces the current site rules. Invalid entries are skipped when valid rules remain.</p>
+        <p class="transfer-status" id="transfer-status" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <a href="https://github.com/SysAdminDoc/ForceBGTab" target="_blank" rel="noreferrer noopener">GitHub</a>
+      <span class="dot">·</span>
+      <span>Background-only · no page access</span>
+    </footer>
+
+    <script src="browser-api.js"></script>
+    <script src="settings.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -264,6 +264,17 @@ h1 {
 .app-footer a:hover {
   color: var(--mauve);
 }
+.app-footer .footer-link {
+  border: 0;
+  background: transparent;
+  color: var(--subtext0);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+.app-footer .footer-link:hover {
+  color: var(--mauve);
+}
 .app-footer .dot {
   color: var(--surface2);
 }

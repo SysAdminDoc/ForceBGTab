@@ -1,4 +1,4 @@
-// ForceBGTab v0.1.0 — popup controller
+// ForceBGTab v0.2.0 — popup controller
 
 const api = globalThis.ForceBGTabApi ?? globalThis.browser ?? globalThis.chrome;
 const tools = globalThis.ForceBGTabSettings;
@@ -12,6 +12,7 @@ const els = {
   rulesCount: document.getElementById("rules-count"),
   rulesEmpty: document.getElementById("rules-empty"),
   repoLink: document.getElementById("repo-link"),
+  optionsLink: document.getElementById("options-link"),
 };
 
 let settings = tools.normalizeSettings(tools.DEFAULTS);
@@ -105,6 +106,13 @@ els.siteRule.addEventListener("click", (event) => {
     renderSiteRule();
     renderRules();
   });
+});
+
+els.optionsLink.addEventListener("click", () => {
+  const openOptions = api.runtime.openOptionsPage;
+  if (typeof openOptions === "function") {
+    Promise.resolve(openOptions.call(api.runtime)).catch(() => {});
+  }
 });
 
 // ── Init ─────────────────────────────────────────────────────────────────────

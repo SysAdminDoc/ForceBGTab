@@ -1,4 +1,4 @@
-// ForceBGTab v0.1.0 — service worker
+// ForceBGTab v0.2.0 — background worker
 //
 // Keeps focus on the tab you're reading. When a link, target="_blank", or
 // window.open() spawns a NEW active tab, we quietly switch focus back to the
